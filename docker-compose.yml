@@ -1,0 +1,36 @@
+version: '3.1'
+
+services:
+  db:
+    build:
+      context: ./db
+      dockerfile: Dockerfile
+    container_name: spaDB
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: '1234'
+      MYSQL_DATABASE: 'spaDB'
+      MYSQL_HOST: 'db'
+    ports:
+      - '3306:3306'
+
+  back:
+    depends_on:
+      - db
+    command: bash -c 'while !</dev/tcp/db/3306; do sleep 1; done; npm start'
+    build:
+      context: ./spa_back
+      dockerfile: Dockerfile
+    image: spaback
+    container_name: spaback
+    ports:
+      - '3001:3001'
+
+  front:
+    build:
+      context: ./spa_front
+      dockerfile: Dockerfile
+    image: spafront
+    container_name: spafront
+    ports:
+      - '3000:3000'
