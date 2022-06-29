@@ -1,11 +1,13 @@
 # FLAT101
-## **Prerequisites**
+## **Development Prerequisites**
 - Node.js >= v16.5.0
 - npm >= 8.1.0
     - Express 
     - MySQL
+    
+## **Docker Prerequisites**
 - Docker >= 20.10.12
-    - MySQL
+
 
 ## **Operarting System**
 Ubuntu 18.04
@@ -28,3 +30,4 @@ sudo docker-compose build
 ```bash
 sudo docker-compose up
 ```
+4. Go to http://localhost:3000
